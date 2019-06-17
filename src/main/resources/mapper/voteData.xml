@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bester.nebulasinfo.dao.VoteDataDao">
+
+    <select id="getDataByHash" parameterType="map" resultType="com.bester.nebulasinfo.entity.VoteDataEntity">
+        SELECT
+        id, hash, "timestamp", usedNat
+        FROM vote_data
+        WHERE hash = #{hash}
+    </select>
+
+    <insert id="insertHashAndTimestamp" parameterType="map">
+        INSERT INTO
+            vote_data
+            (hash, "timestamp", usedNat, createTime, updateTime)
+        VALUES
+            (#{data.hash}, #{data.timestamp}, #{data.usedNat}, NOW(), NOW())
+    </insert>
+
+    <update id="updateRewardAndAddrAndNatByHash" parameterType="map">
+        UPDATE vote_data
+        SET
+        reward = #{data.reward},
+        addr = #{data.addr},
+        burnNat = #{data.burnNat}
+        WHERE hash = #{data.hash}
+    </update>
+
+</mapper>

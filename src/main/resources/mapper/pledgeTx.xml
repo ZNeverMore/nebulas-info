@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bester.nebulasinfo.dao.PledgeTransactionDao">
+
+    <sql id="allFields">
+        id,
+        hash,
+        timestamp,
+        createTime,
+        updateTime
+    </sql>
+
+    <select id="getTxByHash" parameterType="map" resultType="com.bester.nebulasinfo.entity.PledgeOrNrTxEntity">
+        SELECT
+        <include refid="allFields"/>
+        FROM pledge_transaction
+        WHERE hash = #{hash}
+    </select>
+
+    <select id="filterTxByPeriod" parameterType="map" resultType="com.bester.nebulasinfo.entity.PledgeOrNrTxEntity">
+        SELECT
+        <include refid="allFields"/>
+        FROM pledge_transaction p
+        WHERE p.timestamp &gt;= #{startTimestamp} AND p.timestamp &lt;= #{endTimestamp}
+    </select>
+
+    <insert id="insertPledgeTx" parameterType="map">
+        INSERT INTO
+            pledge_transaction
+            (hash, timestamp, createTime, updateTime)
+        VALUES (#{entity.hash}, #{entity.timestamp}, NOW(), NOW())
+    </insert>
+
+
+</mapper>

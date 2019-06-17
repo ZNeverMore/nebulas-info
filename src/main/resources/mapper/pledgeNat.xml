@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bester.nebulasinfo.dao.PledgeNatDao">
+
+
+    <select id="getPledgeNatListByTxHash" parameterType="map" resultType="com.bester.nebulasinfo.entity.PledgeOrNrNatEntity">
+        SELECT
+        id, addr, "value", hash
+        FROM pledge_nat
+        WHERE hash = #{hash}
+    </select>
+
+
+    <insert id="insertPledgeNat" parameterType="map">
+        INSERT INTO
+            pledge_nat
+            (addr, value, hash, createTime, updateTime)
+        VALUES
+            (#{entity.addr}, #{entity.value}, #{entity.hash}, NOW(), NOW())
+    </insert>
+
+</mapper>
