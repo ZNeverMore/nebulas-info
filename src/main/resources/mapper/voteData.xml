@@ -4,7 +4,7 @@
 
     <select id="getDataByHash" parameterType="map" resultType="com.bester.nebulasinfo.entity.VoteDataEntity">
         SELECT
-        id, hash, "timestamp", usedNat
+        id, hash, timestamp, usedNat
         FROM vote_data
         WHERE hash = #{hash}
     </select>
@@ -12,7 +12,7 @@
     <insert id="insertHashAndTimestamp" parameterType="map">
         INSERT INTO
             vote_data
-            (hash, "timestamp", usedNat, createTime, updateTime)
+            (hash, timestamp, usedNat, createTime, updateTime)
         VALUES
             (#{data.hash}, #{data.timestamp}, #{data.usedNat}, NOW(), NOW())
     </insert>

@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface NrNatDao {
 
-    List<PledgeOrNrNatEntity> getNrNatListByTxhash(@Param("hash") String hash);
+    List<PledgeOrNrNatEntity> getNrNatListByTxHash(@Param("hash") String hash);
 
     int insertNrNat(@Param("entity") PledgeOrNrNatEntity entity);
 
